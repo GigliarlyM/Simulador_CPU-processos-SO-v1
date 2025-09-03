@@ -66,31 +66,43 @@ flowchart TD
     InicializarSistema --> ConfigurarEscalonador
     ConfigurarEscalonador --> InicializarCPU
     InicializarCPU --> MainLoop[Laço Principal da CPU]
-    
+
     MainLoop --> VerificarInterrupcao{Verificar necessidade\n de interrupção?}
-    
+
     VerificarInterrupcao -->|Sim| SolicitarNovoProcesso
     VerificarInterrupcao -->|Não| ExecutarInstrucao
-    
+
     SolicitarNovoProcesso --> EscalonadorProximo[Escalonador seleciona\n próximo processo]
     EscalonadorProximo --> AtualizarProcessoCPU[CPU atualiza processo atual]
-    AtualizarProcessoCPU --> ExecutarInstrucao
-    
+    AtualizarProcessoCPU --> ReiniciarContadores[Reiniciar contador de quantum<br>e ciclos]
+    ReiniciarContadores --> ExecutarInstrucao
+
     ExecutarInstrucao --> DecrementarInstrucoes[Decrementar instruções do processo]
     DecrementarInstrucoes --> VerificarProcessoFinalizado{Processo finalizado?}
-    
+
     VerificarProcessoFinalizado -->|Sim| RemoverProcesso[Remover processo do escalonador]
-    VerificarProcessoFinalizado -->|Não| IncrementarCiclos
-    
-    RemoverProcesso --> IncrementarCiclos
-    
-    IncrementarCiclos --> Sleep[Aguardar ciclo de clock]
+    VerificarProcessoFinalizado -->|Não| IncrementarContadores[Incrementar contador de quantum<br>e ciclos de CPU]
+
+    RemoverProcesso --> LimparProcessoAtual
+    LimparProcessoAtual --> IncrementarContadores
+
+    IncrementarContadores --> VerificarQuantum{Quantum atingido?}
+
+    VerificarQuantum -->|Sim| PrepararTrocaProcesso[Preparar troca de processo]
+    VerificarQuantum -->|Não| Sleep[Aguardar ciclo de clock]
+
+    PrepararTrocaProcesso --> DevolverProcessoFila{Processo não finalizado?}
+    DevolverProcessoFila -->|Sim| DevolverFila[Devolver processo à fila<br>do escalonador]
+    DevolverProcessoFila -->|Não| Sleep
+    DevolverFila --> LimparProcessoCPU[CPU: processoAtual = null]
+    LimparProcessoCPU --> Sleep
+
     Sleep --> VerificarContinuação{Continuar execução?}
-    
+
     VerificarContinuação -->|Sim| MainLoop
     VerificarContinuação -->|Não| End([Fim])
-    
-    %% Processos paralelos
+
+%% Processos paralelos
     subgraph ProcessoParalelo [Geração de Processos em Paralelo]
         GeradorLoop[Laço do Gerador de Processos]
         GeradorLoop --> VerificarNecessidadeProcesso{Necessário novo processo?}
@@ -100,6 +112,6 @@ flowchart TD
         VerificarNecessidadeProcesso -->|Não| SleepGerador
         SleepGerador --> GeradorLoop
     end
-    
+
     InicializarSistema --> ProcessoParalelo
 ```
