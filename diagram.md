@@ -19,15 +19,23 @@ classDiagram
     }
 
     class Escalonador {
+        <<interface>>
         -List~Processo~ processos
-        -string algoritmo
-        -int quantum
         -int contadorQuantum
-        +Escalonador(algoritmo: string, quantum: int)
         +adicionarProcesso(processo: Processo): void
         +proximoProcesso(): Processo
         +removerProcesso(processo: Processo): void
         +temProcessos(): boolean
+    }
+    
+    class EscalonadorFCFS {
+    }
+    
+    class EscalonadorRoundRobin {
+        -int quantum
+    }
+    
+    class EscalonadorSJF {
     }
 
     class CPU {
@@ -45,6 +53,9 @@ classDiagram
     CPU --> Escalonador : solicita processos
     Escalonador --> Processo : gerencia
     CPU --> Processo : executa
+    Escalonador <|.. EscalonadorFCFS: implements
+    Escalonador <|.. EscalonadorSJF: implements
+    Escalonador <|.. EscalonadorRoundRobin: implements
 ```
 
 Diagrama de atividade
