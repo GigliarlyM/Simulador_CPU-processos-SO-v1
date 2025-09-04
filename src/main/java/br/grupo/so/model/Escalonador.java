@@ -1,5 +1,7 @@
 package br.grupo.so.model;
 
+import java.util.List;
+
 public abstract class Escalonador {
   public int contador;
 
