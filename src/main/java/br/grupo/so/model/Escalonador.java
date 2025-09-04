@@ -1,7 +1,8 @@
 package br.grupo.so.model;
 
-import java.util.List;
 
+/* Todas as classes filhas terao esses metodos mudando o tipo de estruturacao de dados
+* */
 public abstract class Escalonador {
   public int contador;
 
