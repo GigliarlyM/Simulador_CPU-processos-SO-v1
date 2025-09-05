@@ -11,25 +11,25 @@ public class FCFS extends Escalonador {
 
   public FCFS() {
     this.processos = new ArrayDeque<Processo>();
-  }
+  };
 
   @Override
   public void adicionarProcesso(Processo processo) {
     this.processos.offer(processo);
-  }
+  };
 
   @Override
   public Processo proximoProcesso() {
     return this.processos.poll();
-  }
+  };
 
   @Override
   public void removerProcesso(Processo processo) {
     this.processos.remove(processo);
-  }
+  };
 
   @Override
   public boolean temProcesso() {
     return !this.processos.isEmpty();
-  }
-}
+  };
+};

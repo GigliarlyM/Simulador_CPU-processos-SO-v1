@@ -11,7 +11,7 @@ public class CPU {
   public CPU(Escalonador escalonador, int ciclosInterrupcao) {
     this.escalonador = escalonador;
     this.ciclosInterrupcao = ciclosInterrupcao;
-  }
+  };
 
   // Loop simples para executar os processos
   public void executar() {
@@ -21,7 +21,7 @@ public class CPU {
       }
       this.executarCiclo();
     } while (this.escalonador.temProcesso());
-  }
+  };
 
   // Solicita novo processo ao escalonador independente do seu tipo
   private void solicitarNovoProcesso() {
@@ -30,7 +30,7 @@ public class CPU {
     }
 
     this.processo = this.escalonador.proximoProcesso();
-  }
+  };
 
   // Executa o ciclo levando em consideração o numero limite
   private void executarCiclo() {
@@ -41,15 +41,15 @@ public class CPU {
 
       if (((RoundRobin) this.escalonador).atingiuQuantum()) {
         this.solicitarNovoProcesso();
-      }
+      };
       return;
-    }
+    };
 
     this.contadorCiclos++;
     if (this.contadorCiclos == this.ciclosInterrupcao ||
             this.processo.quantidadeInstrucoes == 0) {
       this.solicitarNovoProcesso();
       this.contadorCiclos=0;
-    }
-  }
-}
+    };
+  };
+};
