@@ -1,6 +1,5 @@
 package br.grupo.so.model;
 
-
 /* Todas as classes filhas terao esses metodos mudando o tipo de estruturacao de dados
 * */
 public abstract class Escalonador {
@@ -13,5 +12,4 @@ public abstract class Escalonador {
   abstract public void removerProcesso(Processo processo);
 
   abstract public boolean temProcesso();
-
-}
+};
