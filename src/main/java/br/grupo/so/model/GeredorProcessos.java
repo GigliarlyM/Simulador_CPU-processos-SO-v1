@@ -3,23 +3,17 @@ package br.grupo.so.model;
 import java.util.Random;
 
 public class GeredorProcessos {
-	static int contadorId = 1;
-	
-	Random random = new Random();
-	
-	public Processo gerarProcesso() {
-		int quantidadeInstrucoes = 10 + random.nextInt(41);
-        Processo processo = new Processo(contadorId++, quantidadeInstrucoes);
-        return processo;
-	};
+    private Random random = new Random();
+	public String quantidadeInstrucoes;
 
-	public static int getContadorId() {
-		return contadorId;
-	};
+    public Processo gerarProcesso() {
+        int id = random.nextInt(41);
+        int quantidadeInstrucoes = 10 + random.nextInt(41);
+        int chegada = random.nextInt(10);
+        int burst = 1 + random.nextInt(10); 
 
-	public static void setContadorId(int contadorId) {
-		GeredorProcessos.contadorId = contadorId;
-	}
+        return new Processo(id, chegada, burst, quantidadeInstrucoes);
+	};
 
 	@Override
 	public String toString() {
