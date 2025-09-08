@@ -27,7 +27,7 @@ public class CPU {
   private void solicitarNovoProcesso() {
     if (this.processo.quantidadeInstrucoes > 0) {
       this.escalonador.adicionarProcesso(this.processo);
-    }
+    };
 
     this.processo = this.escalonador.proximoProcesso();
   };

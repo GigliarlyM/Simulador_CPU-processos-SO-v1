@@ -15,10 +15,11 @@ public class Main {
         for (int i = 0; i < 3; i++) {
             Processo p = gerador.gerarProcesso();
             fcfs.adicionarProcesso(p);   // adiciona no escalonador
-            System.out.println("Gerado: " + p.getId() + " (chegada=" + p.getChegada() + ", burst=" + p.getBurst() + ")");
-        }
+            System.out.println("ID: " + p.getId() + " (chegada=" + p.getChegada() + ", burst=" + p.getBurst() + ")");
+            System.out.println("quantidade de instruções:" + p.getQuantidadeInstrucoes());
+            System.out.println();
+        };
 
-        // Simula com os processos gerados
         fcfs.simular();
-    }
-}
+    };
+};

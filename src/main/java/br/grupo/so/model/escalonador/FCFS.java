@@ -43,7 +43,7 @@ public class FCFS extends Escalonador {
 	    for (Processo p : lista) {
 	        if (tempoAtual < p.getChegada()) {
 	            tempoAtual = p.getChegada();
-	        }
+	        };
 
 	        p.setInicio(tempoAtual);
 	        p.setTermino(p.getInicio() + p.getBurst());
@@ -51,7 +51,7 @@ public class FCFS extends Escalonador {
 	        p.setEspera(p.getTurnaround() - p.getBurst());
 
 	        tempoAtual = p.getTermino();
-	    }
+	    };
 
 	    System.out.println("ID | Chegada | Burst | Início | Término | Turnaround | Espera");
 	    for (Processo p : lista) {
