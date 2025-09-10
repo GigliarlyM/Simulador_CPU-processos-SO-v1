@@ -5,12 +5,10 @@ import br.grupo.so.model.escalonador.RoundRobin;
 public class CPU {
   Escalonador escalonador;
   Processo processo;
-  int ciclosInterrupcao;
   int contadorCiclos;
 
-  public CPU(Escalonador escalonador, int ciclosInterrupcao) {
+  public CPU(Escalonador escalonador) {
     this.escalonador = escalonador;
-    this.ciclosInterrupcao = ciclosInterrupcao;
   };
 
   // Loop simples para executar os processos
@@ -18,6 +16,8 @@ public class CPU {
     do {
       if (this.processo == null) {
         this.processo = this.escalonador.proximoProcesso();
+        System.out.println("Ai bebe 👻\n" + this.processo);
+        System.out.println();
       }
       this.executarCiclo();
     } while (this.escalonador.temProcesso());
@@ -25,7 +25,7 @@ public class CPU {
 
   // Solicita novo processo ao escalonador independente do seu tipo
   private void solicitarNovoProcesso() {
-    if (this.processo.quantidadeInstrucoes > 0) {
+    if (this.processo.getQuantidadeInstrucoes() > 0) {
       this.escalonador.adicionarProcesso(this.processo);
     };
 
@@ -34,22 +34,25 @@ public class CPU {
 
   // Executa o ciclo levando em consideração o numero limite
   private void executarCiclo() {
-    this.processo.quantidadeInstrucoes--;
+    this.processo.reduzirIntrucoes();
+    System.out.println("Instrucao reduzida 📃\n" + this.processo);
 
     if (this.escalonador instanceof RoundRobin) {
       ((RoundRobin) this.escalonador).somarQuantum();
 
       if (((RoundRobin) this.escalonador).atingiuQuantum()) {
+        System.out.println("Atingiu o quantum 🤔:\n"+this.processo);
         this.solicitarNovoProcesso();
-      };
-      return;
-    };
+      }
+    }
 
     this.contadorCiclos++;
-    if (this.contadorCiclos == this.ciclosInterrupcao ||
-            this.processo.quantidadeInstrucoes == 0) {
+    if (this.processo.getQuantidadeInstrucoes() <= 0) {
+      System.out.println("Acabou as instrucoes 🧑‍💻\n" + this.processo);
       this.solicitarNovoProcesso();
       this.contadorCiclos=0;
-    };
-  };
-};
+    }
+
+    System.out.println();
+  }
+}

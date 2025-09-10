@@ -9,10 +9,8 @@ public class GeredorProcessos {
     public Processo gerarProcesso() {
         int id = random.nextInt(41);
         int quantidadeInstrucoes = 10 + random.nextInt(41);
-        int chegada = random.nextInt(10);
-        int burst = 1 + random.nextInt(10); 
 
-        return new Processo(id, chegada, burst, quantidadeInstrucoes);
+        return new Processo(id, quantidadeInstrucoes);
 	};
 
 	@Override
