@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Main {
   public static void main(String[] args) {
-    System.out.println("Esse eh um simulador de processamento de processos de uma CPU!!");
+    System.out.println("Esse eh um simulador de processamento de processos de uma CPU!!");//
 
     Random random = new Random();
     CPU cpu;

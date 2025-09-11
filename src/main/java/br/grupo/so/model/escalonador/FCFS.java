@@ -16,7 +16,7 @@ public class FCFS extends Escalonador {
 
 	@Override
 	public void adicionarProcesso(Processo processo) {
-		this.processos.offer(processo);
+		this.processos.add(processo);
 	};
 
 	@Override

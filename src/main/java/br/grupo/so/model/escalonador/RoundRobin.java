@@ -42,13 +42,16 @@ public class RoundRobin extends Escalonador {
 
   public void somarQuantum() {
     this.contadorQuantum++;
-
-    if (this.contadorQuantum >= this.quantum) {
-      this.contadorQuantum = 0;
-    };
   };
 
   public boolean atingiuQuantum() {
     return this.contadorQuantum >= this.quantum;
   };
+  
+  public void resetarContadorQuantum() {
+	  if (this.atingiuQuantum()) {
+		  this.contadorQuantum = 0;
+	  }
+  }
 };
+

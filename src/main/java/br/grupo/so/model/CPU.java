@@ -20,7 +20,7 @@ public class CPU {
         System.out.println();
       }
       this.executarCiclo();
-    } while (this.escalonador.temProcesso());
+    } while (this.escalonador.temProcesso() || this.processo != null);
   };
 
   // Solicita novo processo ao escalonador independente do seu tipo
@@ -34,6 +34,9 @@ public class CPU {
 
   // Executa o ciclo levando em consideração o numero limite
   private void executarCiclo() {
+	  if (this.processo == null) {
+		  return;
+	  }
     this.processo.reduzirIntrucoes();
     System.out.println("Instrucao reduzida 📃\n" + this.processo);
 
@@ -43,6 +46,7 @@ public class CPU {
       if (((RoundRobin) this.escalonador).atingiuQuantum()) {
         System.out.println("Atingiu o quantum 🤔:\n"+this.processo);
         this.solicitarNovoProcesso();
+        ((RoundRobin) this.escalonador).resetarContadorQuantum();
       }
     }
 
