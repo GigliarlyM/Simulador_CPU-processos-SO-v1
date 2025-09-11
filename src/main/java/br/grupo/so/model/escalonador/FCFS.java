@@ -6,6 +6,7 @@ import br.grupo.so.model.Processo;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
+// Algoritmo nao preemptivo
 public class FCFS extends Escalonador {
 	Queue<Processo> processos;
 

@@ -5,6 +5,7 @@ import br.grupo.so.model.Processo;
 
 import java.util.PriorityQueue;
 
+// Nao preemptivo
 public class SJF extends Escalonador {
   private PriorityQueue<Processo> queue;
 

@@ -6,6 +6,9 @@ import br.grupo.so.model.Processo;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/* Algoritmo de natureza premptiva, onde sera determinado pelo o quantum
+ * quanto de instrucoes sera realizada pela a CPU
+ * */
 public class RoundRobin extends Escalonador {
   private Queue<Processo> queue;
   private int quantum;
